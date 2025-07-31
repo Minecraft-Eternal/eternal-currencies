@@ -151,7 +151,8 @@ repositories {
         url = "https://modmaven.dev"
     }
     maven {
-        url "https://maven.latvian.dev/releases"
+        // Lat's Maven (KubeJS and Rhino)
+        url = "https://maven.latvian.dev/releases"
         content {
             includeGroup "dev.latvian.mods"
             includeGroup "dev.latvian.apps"
