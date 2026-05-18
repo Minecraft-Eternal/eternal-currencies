@@ -1,5 +1,6 @@
 package com.mceternal.eternalcurrencies.network;
 
+import com.mceternal.eternalcurrencies.EternalCurrencies;
 import com.mceternal.eternalcurrencies.api.shop.ShopEntry;
 import com.mceternal.eternalcurrencies.data.EternalCurrenciesRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -37,10 +38,16 @@ public class C2SBuyShopEntryPacket implements IntSupplier {
         context.enqueueWork(() -> {
             ServerPlayer sender = context.getSender();
             sender.sendSystemMessage(Component.literal("Received BuyShopEntryPacket for '"+ target +"' in '"+ category.toString() +"'"));
+            //TODO: this ifPresent is failing. why?
             sender.level().registryAccess().registry(EternalCurrenciesRegistries.KEY_SHOP_CATEGORIES).ifPresent(categories -> {
                 Optional<ShopEntry> entry = categories.get(category).getEntry(target);
-                if (entry.isPresent() && entry.get().canPurchase(sender))
+                EternalCurrencies.LOGGER.info("ShopEntry isPresent: {}, canPurchase: {}",
+                        entry.isPresent(), entry.map(shopEntry -> shopEntry.canPurchase(sender)).orElse(false));
+
+                if (entry.isPresent() && entry.get().canPurchase(sender)) {
+                    EternalCurrencies.LOGGER.info("Purchasing entry {}", target);
                     entry.get().purchase(sender);
+                }
             });
         });
         context.setPacketHandled(true);

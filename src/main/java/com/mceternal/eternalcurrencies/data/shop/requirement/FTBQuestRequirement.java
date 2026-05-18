@@ -12,8 +12,10 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class FTBQuestRequirement extends ShopRequirement<Long> {
 
+    public static final Codec<Long> CONTENT_CODEC = Codec.STRING.comapFlatMap(FTBQuestRequirement::parseHexString, FTBQuestRequirement::writeHexLong);
+
     public static final MapCodec<FTBQuestRequirement> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-            Codec.STRING.comapFlatMap(FTBQuestRequirement::parseHexString, FTBQuestRequirement::writeHexLong).fieldOf("quest").forGetter(e -> e.target)
+            CONTENT_CODEC.fieldOf("quest").forGetter(e -> e.target)
     ).apply(inst, FTBQuestRequirement::new));
 
     private static String writeHexLong(Long aLong) {
@@ -36,7 +38,7 @@ public class FTBQuestRequirement extends ShopRequirement<Long> {
 
     @Override
     public Codec contentCodec() {
-        return null;
+        return CONTENT_CODEC;
     }
 
     @Override

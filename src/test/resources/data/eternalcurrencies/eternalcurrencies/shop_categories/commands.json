@@ -18,6 +18,83 @@
           "quest": "1fb3e8aebac2f41a"
         }
       ]
+    },
+    {
+      "type": "eternalcurrencies:item",
+      "id": "item_gold",
+      "item": {
+        "id": "minecraft:gold",
+        "Count": 1
+      },
+      "costs": {
+        "eternalcurrencies:coins": 50
+      }
+    },
+    {
+      "type": "eternalcurrencies:item",
+      "id": "item_diamond",
+      "item": {
+        "id": "minecraft:diamond",
+        "Count": 1
+      },
+      "costs": {
+        "eternalcurrencies:coins": 100
+      }
+    },
+    {
+      "type": "eternalcurrencies:item",
+      "id": "item_emerald",
+      "item": {
+        "id": "minecraft:emerald",
+        "Count": 1
+      },
+      "costs": {
+        "eternalcurrencies:coins": 50
+      }
+    },
+    {
+      "type": "eternalcurrencies:item",
+      "id": "item_glowstone",
+      "item": {
+        "id": "minecraft:glowstone",
+        "Count": 1
+      },
+      "costs": {
+        "eternalcurrencies:coins": 30
+      }
+    },
+    {
+      "type": "eternalcurrencies:item",
+      "id": "item_lapis",
+      "item": {
+        "id": "minecraft:lapis_lazuli",
+        "Count": 1
+      },
+      "costs": {
+        "eternalcurrencies:coins": 20
+      }
+    },
+    {
+      "type": "eternalcurrencies:item",
+      "id": "item_redstone",
+      "item": {
+        "id": "minecraft:redstone",
+        "Count": 1
+      },
+      "costs": {
+        "eternalcurrencies:coins": 50
+      }
+    },
+    {
+      "type": "eternalcurrencies:item",
+      "id": "item_quartz",
+      "item": {
+        "id": "minecraft:quartz",
+        "Count": 1
+      },
+      "costs": {
+        "eternalcurrencies:coins": 50
+      }
     }
   ]
 }

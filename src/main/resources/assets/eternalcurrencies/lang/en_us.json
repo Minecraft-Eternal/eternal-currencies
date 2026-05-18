@@ -38,6 +38,9 @@
   "keys.eternalcurrencies.category": "Eternal Currencies",
   "key.eternalcurrencies.open_shop": "Open Shop",
 
+  "shopentry.eternalcurrencies.command": "Command: %s",
+  "shopentry.eternalcurrencies.potion_effect": "Potion Effect: %1$s %2$s",
+
 
   "ftbquests.reward.eternalcurrencies.currency": "Currency Reward",
   "ftbquests.reward.eternalcurrencies.currency.currency": "Currency",

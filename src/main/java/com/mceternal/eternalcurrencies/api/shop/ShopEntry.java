@@ -2,11 +2,14 @@ package com.mceternal.eternalcurrencies.api.shop;
 
 import com.mceternal.eternalcurrencies.api.EternalCurrenciesAPI;
 import com.mceternal.eternalcurrencies.data.EternalCurrenciesRegistries;
+import com.mceternal.eternalcurrencies.gui.CurrencyShopScreen;
 import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Keyable;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -89,4 +92,9 @@ public abstract class ShopEntry<T> {
 
 
     public abstract boolean autoPurchasable();
+
+
+    public void renderTooltip(CurrencyShopScreen.ShopEntryButton button, GuiGraphics pGuiGraphics, Font gameFont, int pMouseX, int pMouseY) {
+        pGuiGraphics.renderTooltip(gameFont, button.entry.getName(), pMouseX, pMouseY);
+    }
 }

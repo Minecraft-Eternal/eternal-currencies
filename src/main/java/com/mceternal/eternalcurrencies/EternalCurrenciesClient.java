@@ -8,19 +8,20 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
 
-public class EternalCurrenciesClient implements Runnable {
+public class EternalCurrenciesClient {
+
+    private EternalCurrenciesClient() {}
 
     public static final String SHOP_KEY_NAME = "key."+ EternalCurrencies.MODID +".open_shop";
     public static final KeyMapping KEY_OPEN_SHOP = new KeyMapping(SHOP_KEY_NAME, GLFW.GLFW_KEY_APOSTROPHE, "keys."+ EternalCurrencies.MODID +".category");
 
-    @Override
-    public void run() {
+    public static void init() {
         if(EternalCurrencies.FTBQ_LOADED) {
             //QuestsIntegrationClient.setupRewardGuiProviders();
             //QuestsIntegrationClient.setupTaskGuiProviders();
         }
 
-        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(EternalCurrenciesClient::onClientTick);
     }
 
     public static void openShopScreen() {
@@ -28,8 +29,8 @@ public class EternalCurrenciesClient implements Runnable {
         Minecraft.getInstance().setScreen(shopScreen);
     }
 
-    //@SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event) {
+    @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
         if(event.phase == TickEvent.ClientTickEvent.Phase.END && KEY_OPEN_SHOP.consumeClick() && Minecraft.getInstance().isWindowActive())
             openShopScreen();
     }
