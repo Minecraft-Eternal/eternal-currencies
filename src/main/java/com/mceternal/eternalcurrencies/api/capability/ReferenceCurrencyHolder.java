@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * This implementation of ICurrencies stores a UUID to reference a {@link DirectCurrencyHolder} within {@link CurrencySavedData}, which is accessed as if it were the balance of the Capability's Object.
@@ -20,13 +19,13 @@ public class ReferenceCurrencyHolder implements ICurrencies {
 
     public static final String NBTKEY_HOLDER_REFERENCE = "reference_uuid";
 
-    public ReferenceCurrencyHolder(UUID referenceUUID, Supplier<MinecraftServer> serverSupplier) {
+    public ReferenceCurrencyHolder(UUID referenceUUID, MinecraftServer server) {
         this.referenceUUID = referenceUUID;
-        this.serverSupplier = serverSupplier;
+        this.server = server;
     }
 
     protected UUID referenceUUID;
-    private final Supplier<MinecraftServer> serverSupplier;
+    private final MinecraftServer server;
 
     @Override
     public long getCurrency(ResourceLocation currency) {
@@ -104,7 +103,7 @@ public class ReferenceCurrencyHolder implements ICurrencies {
 
     public CurrencySavedData getCurrencies() {
         try {
-            return serverSupplier.get().overworld().getDataStorage().computeIfAbsent(CurrencySavedData::load, CurrencySavedData::new, "eternal-currencies");
+            return server.overworld().getDataStorage().computeIfAbsent(CurrencySavedData::load, CurrencySavedData::new, "eternal-currencies");
         } catch (NullPointerException e) {
             throw new RuntimeException("Failed getting CurrencySavedData.", e);
         }
